@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/skyblue"
+    tools:context=".MainScreen">
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="당신의 관심지역"
+        android:textColor="@color/black"
+        android:textSize="25dp"/>
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/main_background_00"
+        android:layout_gravity="center"/>
+
+    <ListView
+        android:id="@+id/interest_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="55dp"
+        android:layout_marginBottom="90dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/reload"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:layout_marginTop="30dp"
+            android:layout_width="70dp"
+            android:layout_height="30dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/copyright" />
+    </LinearLayout>
+
+</FrameLayout>

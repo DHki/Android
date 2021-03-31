@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    tools:context=".MainScreen">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@drawable/main_background"
+        android:background="@color/sky_blue"/>
+
+    <TextView
+        android:id="@+id/main_text"
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="보물찾기 게임!!"
+        android:textSize="35dp"
+        android:gravity="center"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/play_solo"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1인용"
+        android:onClick="main_screen_button"/>
+
+    <Button
+        android:id="@+id/play_couple"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="270dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2인용"
+        android:onClick="main_screen_button"/>
+
+    <Button
+        android:id="@+id/help"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="340dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="도움말"
+        android:onClick="main_screen_button"/>
+
+    <ImageView
+        android:layout_marginTop="420dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/treasure_00"/>
+
+</FrameLayout>
