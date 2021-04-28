@@ -24,7 +24,7 @@ public class MainScreen extends AppCompatActivity {
     private void setDefault(){
         ListView lv = (ListView) findViewById(R.id.interest_list);
 
-        ArrayAdapter adapter =ArrayAdapter.createFromResource(getApplicationContext(), R.array.location, android.R.layout.simple_expandable_list_item_1);
+        ArrayAdapter adapter = ArrayAdapter.createFromResource(getApplicationContext(), R.array.location, android.R.layout.simple_expandable_list_item_1);
         lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
