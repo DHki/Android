@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -17,18 +18,18 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class GetWeather{
-    private String webUrl;
+    private String webUrl; // 접속해야 할 url을 저장합니다.
     private String serviceUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService/getUltraSrtNcst";
     private String serviceKey = "SGekjuNyDUVjKfl26VG%2BSRQEJDGGsqsKvJTNZrZGQWcez4lllhqoKeYfnryztvVBRRWalGeP4ulEvt1Vkao%2FAg%3D%3D";
 
-    public String time[];
+    private String time[]; // 현재 시간에 대한 정보를 저장할 배열입니다.
+
+    private StringBuilder builder; // 네트워크에 접속하고, xml을 저장할 객체입니다.
 
     GetWeather(String nx, String ny){
         time = getCurrentTime();
         webUrl = serviceUrl + "?serviceKey=" + serviceKey + "&numOfRows=10&pageNo=1&base_date=" + time[0] + "&base_time=" + time[1];
         webUrl += "&nx=" + nx + "&ny=" + ny;
-
-        connectWeb();
     }
 
     private String[] getCurrentTime(){
@@ -54,31 +55,23 @@ public class GetWeather{
         return ret;
     }
 
-    private void connectWeb(){
-        HttpURLConnection conn = null;
-        String data = "";
-
-        try{
+    public void connectWeb(){
+        try {
             URL url = new URL(webUrl);
-            conn = (HttpURLConnection) url.openConnection();
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
 
-            BufferedInputStream buffer = new BufferedInputStream(conn.getInputStream());
-            BufferedReader buffer_reader = new BufferedReader(new InputStreamReader(buffer, "utf-8"));
+            builder = new StringBuilder();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+            String line;
 
-            String line = null;
-            while((line = buffer_reader.readLine()) != null){
-                data += line;
-            }
+            while((line = reader.readLine()) != null) builder.append(line + "\n");
+        }catch (Exception e) {
+            e.printStackTrace();
         }
-        catch (Exception e){}
-        finally {
-            conn.disconnect();
-        }
-
-        analyzeData(data);
     }
 
-    private void analyzeData(String data){
-        
+    public void analyzeData(){
+
     }
 }

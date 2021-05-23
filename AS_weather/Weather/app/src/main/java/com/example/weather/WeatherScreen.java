@@ -13,8 +13,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class WeatherScreen extends AppCompatActivity {
-    ExecutorService executorService;
+    Executor executer;
+
     GetWeather weather;
+
     String location[], nx[], ny[];
     int index;
 
@@ -27,18 +29,21 @@ public class WeatherScreen extends AppCompatActivity {
     }
 
     private void setDefault(){
-        executorService = Executors.newFixedThreadPool(4);
+        executer = Executors.newFixedThreadPool(4);
+
         index = getIntent().getIntExtra("index", -1);
         location = getResources().getStringArray(R.array.location);
         nx = getResources().getStringArray(R.array.nx);
         ny = getResources().getStringArray(R.array.ny);
 
-        executorService.execute(new Runnable() {
+        weather = new GetWeather(nx[index], ny[index]);
+        executer.execute(new Runnable() {
             @Override
             public void run() {
-                weather = new GetWeather(nx[index], ny[index]);
+                weather.connectWeb();
             }
         });
+        // 그 뒤에 weather.analyze()를 한 뒤에 화면에 출력하도록 해야함.
 
         TextView title = (TextView) findViewById(R.id.title_weather);
         String tmp_title = location[index] + "의 현재 날씨";
