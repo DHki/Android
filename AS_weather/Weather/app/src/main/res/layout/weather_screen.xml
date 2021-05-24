@@ -7,13 +7,21 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_marginTop="10dp"
         android:id="@+id/title_weather"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="25dp"
         android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/weather_content"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
 
 
 </LinearLayout>
