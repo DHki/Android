@@ -19,9 +19,17 @@
         android:id="@+id/weather_content"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="500dp"
         android:textColor="@color/black"
         android:textSize="20dp" />
+
+    <Button
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:onClick="back"
+        android:text="back"/>
 
 
 </LinearLayout>
