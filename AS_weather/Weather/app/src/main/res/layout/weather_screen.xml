@@ -29,7 +29,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:onClick="back"
-        android:text="back"/>
+        android:text="back"
+        android:textSize="12dp"/>
 
 
 </LinearLayout>
