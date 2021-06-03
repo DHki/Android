@@ -1,5 +1,6 @@
 package com.example.weather;
 
+import android.os.Handler;
 import android.util.Xml;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,14 +23,15 @@ public class GetWeatherFuture extends Thread{
     private String serviceUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst";
     private String serviceKey = "SGekjuNyDUVjKfl26VG%2BSRQEJDGGsqsKvJTNZrZGQWcez4lllhqoKeYfnryztvVBRRWalGeP4ulEvt1Vkao%2FAg%3D%3D";
     private String time[];
-    private String response;
-    private TextView textView;
+    private String response = "";
 
     private int status = -1;
     private int sky = -1;
     private String percent;
-    private String maxTempreture;
-    private String minTempreture;
+    private String tempreture;
+
+    public String result;
+    public TextView textView;
 
     GetWeatherFuture(String nx, String ny, TextView textView){
         this.textView = textView;
@@ -41,11 +44,9 @@ public class GetWeatherFuture extends Thread{
     public void run(){
         try{
             connectWeb();
-            //analyzeResponse();
-        }catch (Exception e){}
-
-        //String content = makeContent();
-        //textView.setText(content);
+            analyzeResponse();
+            result = makeContent();
+        } catch (Exception e) {result = e.getMessage();}
     }
 
     private String[] getCurrentTime(){
@@ -106,48 +107,99 @@ public class GetWeatherFuture extends Thread{
             String line = "";
 
             while((line = reader.readLine()) != null) response += line;
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
+        }catch (Exception e) {}
     }
 
-    /* private void analyzeData() throws XmlPullParserException, IOException {
-        InputStream inputStream = new ByteArrayInputStream(content.getBytes());
+    private void analyzeResponse(){
+        InputStream inputStream = new ByteArrayInputStream(response.getBytes());
         XmlPullParser parser = null;
 
         try{
             parser = Xml.newPullParser();
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
             parser.setInput(inputStream, null);
-            parser.next();
-        }catch (Exception e){}
+            parser.nextTag();
+        }catch (Exception e) {}
 
-        int cnt = 0;
-        while(parser.next() != XmlPullParser.END_DOCUMENT){
+        String decide = "None";
+        try {
+            while (parser.next() != XmlPullParser.END_DOCUMENT) {
+                if (parser.getEventType() == XmlPullParser.START_TAG && parser.getName().equals("category")) {
+                    parser.next();
+                    String tmp = parser.getText();
 
-            if(parser.getEventType() == XmlPullParser.START_TAG && parser.getName().equals("obsrValue")) {
-
-                parser.next();
-
-                switch (cnt) {
-                    case 0:
-                        status = Integer.parseInt(parser.getText());
-                        break;
-                    case 1:
-                        humidity = parser.getText();
-                        break;
-                    case 2:
-                        precipitation = parser.getText();
-                        break;
-                    case 3:
-                        tempreture = parser.getText();
-                        break;
-                    case 7:
-                        windSpeed = parser.getText();
-                        break;
+                    if (tmp.equals("POP")) decide = "POP";
+                    else if (tmp.equals("PTY")) decide = "PTY";
+                    else if (tmp.equals("SKY")) decide = "SKY";
+                    else if (tmp.equals("T3H")) decide = "T3H";
                 }
-                cnt++;
+
+                if (parser.getEventType() == XmlPullParser.START_TAG && parser.getName().equals("fcstValue")) {
+                    parser.next();
+
+                    if (decide.equals("POP")) percent = parser.getText();
+                    else if (decide.equals("PTY")) status = Integer.parseInt(parser.getText());
+                    else if (decide.equals("SKY")) sky = Integer.parseInt(parser.getText());
+                    else if (decide.equals("T3H")) tempreture = parser.getText();
+
+                    decide = "None";
+                }
             }
+        }catch (Exception e) {}
+    }
+
+    private String makeContent(){
+        String tmp = "<예보>\n\n";
+
+        tmp += "3시간 기온: " + tempreture + "℃\n\n";
+        tmp += "하늘 상태: ";
+        switch (sky){
+            case 1:
+                tmp += "맑음\n\n";
+                break;
+            case 3:
+                tmp += "구름 많음\n\n";
+                break;
+            case 4:
+                tmp += "흐림\n\n";
+                break;
+            default:
+                tmp += "XML파싱 에러\n\n";
+                break;
         }
-    }*/
+
+        tmp += "강수 확률: " + percent + "%\n\n";
+        tmp += "강수 형태: ";
+        switch (status){
+            case 0:
+                tmp += "없음\n\n";
+                break;
+            case 1:
+                tmp += "비\n\n";
+                break;
+            case 2:
+                tmp += "비/눈\n\n";
+                break;
+            case 3:
+                tmp += "눈\n\n";
+                break;
+            case 4:
+                tmp += "소나기\n\n";
+                break;
+            case 5:
+                tmp += "빗방울\n\n";
+                break;
+            case 6:
+                tmp += "빗방울/눈날림\n\n";
+                break;
+            case 7:
+                tmp += "눈날림\n\n";
+                break;
+            default:
+                tmp += "XML 파싱 에러\n\n";
+                break;
+        }
+
+        return tmp;
+    }
 }

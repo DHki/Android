@@ -2,6 +2,7 @@ package com.example.weather;
 
 
 
+import android.os.Handler;
 import android.util.Xml;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import java.io.InputStream;
 
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,7 +35,9 @@ public class GetWeatherCurrent extends Thread{
     private String precipitation = "";
     private String windSpeed = "";
 
-    private TextView textView;
+    public String result;
+    public TextView textView;
+
     GetWeatherCurrent(String nx, String ny, TextView textView){
         this.textView = textView;
 
@@ -43,13 +47,11 @@ public class GetWeatherCurrent extends Thread{
     }
 
     public void run(){
-        connectWeb();
         try{
+            connectWeb();
             analyzeData();
-        }catch (Exception e){}
-
-        String content = makeContent();
-        textView.setText(content);
+            result = makeContent();
+        } catch (Exception e) {result = e.getMessage();}
     }
 
     private static String[] getCurrentTime(){
@@ -81,7 +83,7 @@ public class GetWeatherCurrent extends Thread{
         return ret;
     }
 
-    private void connectWeb(){
+    public void connectWeb(){
         try {
             URL url = new URL(webUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -91,13 +93,10 @@ public class GetWeatherCurrent extends Thread{
             String line = "";
 
             while((line = reader.readLine()) != null) content += line;
-        }catch (Exception e) {
-            e.printStackTrace();
-            content = e.getMessage();
-        }
+        }catch (Exception e){}
     }
 
-    private void analyzeData()throws XmlPullParserException, IOException {
+    public void analyzeData(){
         InputStream inputStream = new ByteArrayInputStream(content.getBytes());
         XmlPullParser parser = null;
 
@@ -109,71 +108,73 @@ public class GetWeatherCurrent extends Thread{
         }catch (Exception e){}
 
         int cnt = 0;
-        while(parser.next() != XmlPullParser.END_DOCUMENT){
+        try {
+            while (parser.next() != XmlPullParser.END_DOCUMENT) {
 
-            if(parser.getEventType() == XmlPullParser.START_TAG && parser.getName().equals("obsrValue")) {
+                if (parser.getEventType() == XmlPullParser.START_TAG && parser.getName().equals("obsrValue")) {
 
-                parser.next();
+                    parser.next();
 
-                switch (cnt) {
-                    case 0:
-                        status = Integer.parseInt(parser.getText());
-                        break;
-                    case 1:
-                        humidity = parser.getText();
-                        break;
-                    case 2:
-                        precipitation = parser.getText();
-                        break;
-                    case 3:
-                        tempreture = parser.getText();
-                        break;
-                    case 7:
-                        windSpeed = parser.getText();
-                        break;
+                    switch (cnt) {
+                        case 0:
+                            status = Integer.parseInt(parser.getText());
+                            break;
+                        case 1:
+                            humidity = parser.getText();
+                            break;
+                        case 2:
+                            precipitation = parser.getText();
+                            break;
+                        case 3:
+                            tempreture = parser.getText();
+                            break;
+                        case 7:
+                            windSpeed = parser.getText();
+                            break;
+                    }
+                    cnt++;
                 }
-                cnt++;
             }
-        }
+        }catch (Exception e) {}
     }
 
-    private String makeContent(){
-        String tmp = "\n";
+    public String makeContent(){
+        String tmp = "<단기실황>\n\n";
 
-        tmp += "온도: " + tempreture + "℃\n\n\n";
+        tmp += "온도: " + tempreture + "℃\n\n";
         tmp += "강수 형태: ";
         switch (status){
             case 0:
-                tmp += "없음\n\n\n";
+                tmp += "없음\n\n";
                 break;
             case 1:
-                tmp += "비\n\n\n";
+                tmp += "비\n\n";
                 break;
             case 2:
-                tmp += "비/눈\n\n\n";
+                tmp += "비/눈\n\n";
                 break;
             case 3:
-                tmp += "눈\n\n\n";
+                tmp += "눈\n\n";
                 break;
             case 4:
-                tmp += "소나기\n\n\n";
+                tmp += "소나기\n\n";
                 break;
             case 5:
-                tmp += "빗방울\n\n\n";
+                tmp += "빗방울\n\n";
                 break;
             case 6:
-                tmp += "빗방울/눈날림\n\n\n";
+                tmp += "빗방울/눈날림\n\n";
                 break;
             case 7:
-                tmp += "눈날림\n\n\n";
+                tmp += "눈날림\n\n";
                 break;
             default:
-                tmp += "XML 파싱 에러\n\n\n";
+                tmp += "XML 파싱 에러\n\n";
                 break;
         }
-        tmp += "습도: " + humidity + "%\n\n\n";
-        tmp += "강수량: " + precipitation + "mm\n\n\n";
-        tmp += "풍속: " + windSpeed + "m/s";
+        tmp += "습도: " + humidity + "%\n\n";
+        tmp += "강수량: " + precipitation + "mm\n\n";
+        tmp += "풍속: " + windSpeed + "m/s\n";
 
         return tmp;
     }
