@@ -64,7 +64,7 @@ public class GetWeatherCurrent extends Thread{
             String clock = ret[1].substring(0, 2);
             if(clock.equals("00")) {
                 time = new Date();
-                time = new Date(time.getTime() + (1000*60*60*24 - 1));
+                time = new Date(time.getTime() - (1000*60*60*24 - 1));
 
                 ret[0] = format.format(time).substring(0, 8);
                 ret[1] = "2300";

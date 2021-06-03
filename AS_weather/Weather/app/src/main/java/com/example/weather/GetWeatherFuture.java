@@ -68,7 +68,7 @@ public class GetWeatherFuture extends Thread{
             else if(tmp >= 2) ret[1] = "0200";
             else {
                 time = new Date();
-                time = new Date(time.getTime() + (1000*60*60*24 - 1));
+                time = new Date(time.getTime() - (1000*60*60*24 - 1));
 
                 ret[0] = format.format(time).substring(0, 8);
                 ret[1] = "2300";
@@ -87,7 +87,7 @@ public class GetWeatherFuture extends Thread{
             else if(tmp >= 3) ret[1] = "0200";
             else {
                 time = new Date();
-                time = new Date(time.getTime() + (1000*60*60*24 - 1));
+                time = new Date(time.getTime() - (1000*60*60*24 - 1));
 
                 ret[0] = format.format(time).substring(0, 8);
                 ret[1] = "2300";
