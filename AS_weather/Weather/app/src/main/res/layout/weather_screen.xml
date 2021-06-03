@@ -16,13 +16,23 @@
         android:gravity="center"/>
 
     <TextView
-        android:id="@+id/weather_content"
+        android:id="@+id/weather_content_current"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="390dp"
         android:textColor="@color/black"
         android:textSize="20dp" />
-
+    <TextView
+        android:id="@+id/weather_content_future"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:textColor="@color/black"
+        android:textSize="20dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
     <Button
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -31,6 +41,7 @@
         android:onClick="back"
         android:text="back"
         android:textSize="12dp"/>
+
 
 
 </LinearLayout>

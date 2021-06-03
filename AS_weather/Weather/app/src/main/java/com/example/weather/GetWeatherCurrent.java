@@ -20,7 +20,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class GetWeather extends Thread{
+public class GetWeatherCurrent extends Thread{
     private String webUrl; // 접속해야 할 url을 저장합니다.
     private String serviceUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService/getUltraSrtNcst";
     private String serviceKey = "SGekjuNyDUVjKfl26VG%2BSRQEJDGGsqsKvJTNZrZGQWcez4lllhqoKeYfnryztvVBRRWalGeP4ulEvt1Vkao%2FAg%3D%3D";
@@ -34,7 +34,7 @@ public class GetWeather extends Thread{
     public String windSpeed = "";
 
     private TextView textView;
-    GetWeather(String nx, String ny, TextView textView){
+    GetWeatherCurrent(String nx, String ny, TextView textView){
         this.textView = textView;
 
         time = getCurrentTime();

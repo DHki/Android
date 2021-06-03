@@ -17,7 +17,8 @@ import java.util.concurrent.TimeUnit;
 public class WeatherScreen extends AppCompatActivity {
     ExecutorService service;
 
-    GetWeather weather;
+    GetWeatherCurrent weatherCurrent;
+    // GetWeatherFuture weatherFuture;
 
     String location[], nx[], ny[];
     int index;
@@ -39,8 +40,11 @@ public class WeatherScreen extends AppCompatActivity {
         ny = getResources().getStringArray(R.array.ny);
 
         // 먼저 새로운 스레드로 인터넷에 연결하도록 해야합니다.
-        weather = new GetWeather(nx[index], ny[index], (TextView) findViewById(R.id.weather_content));
-        weather.start();
+        weatherCurrent = new GetWeatherCurrent(nx[index], ny[index], (TextView) findViewById(R.id.weather_content_current));
+        weatherCurrent.start();
+
+        //weatherFuture = new GetWeatherFuture;
+        //weatherFuture.start();
 
         Toast.makeText(this, "Connecting started", Toast.LENGTH_SHORT).show();
 
