@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="week">
+        <item>월</item>
+        <item>화</item>
+        <item>수</item>
+        <item>목</item>
+        <item>금</item>
+    </string-array>
+
+    <string-array name="exercise">
+        <item>팔굽혀펴기 50개, 윗몸일으키기 50개</item>
+        <item>턱걸이 10개, 러닝 30분</item>
+        <item>스쿼트 50개, 팔굽혀펴기 50개, 줄넘기 15분</item>
+        <item>플랭크 3분, 러닝 30분</item>
+        <item>온몸비틀기 20개, 팔굽혀펴기 50개</item>
+    </string-array>
+</resources>

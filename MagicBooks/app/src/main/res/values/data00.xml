@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="normal">
+        <item>마음 가는 대로</item>
+        <item>그렇게 행동한다면</item>
+        <item>가만히 있는다면</item>
+        <item>마음만 먹는다면</item>
+        <item>포기하는 마음으로</item>
+        <item>긍정적인 시선으로</item>
+        <item>부정적인 시선으로</item>
+        <item>진심이라면</item>
+    </string-array>
+
+    <string-array name="concern">
+        <item>지금껏 해왔던 방식으로</item>
+        <item>질문을 하면서 마음 한 켠에 있던 방향으로</item>
+        <item>고유의 가치를 잊지 말기를</item>
+        <item>시선을 신경쓰지 않는다면</item>
+        <item>많은 고생 속에, 잠깐의 쉬는 고개가 되기를</item>
+    </string-array>
+
+    <string-array name="lover">
+        <item>가.연인</item>
+        <item>나.연인</item>
+    </string-array>
+
+</resources>
