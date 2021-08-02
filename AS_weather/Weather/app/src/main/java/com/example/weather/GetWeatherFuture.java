@@ -20,7 +20,7 @@ import java.util.Date;
 
 public class GetWeatherFuture extends Thread{
     private String webUrl;
-    private String serviceUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService/getVilageFcst";
+    private String serviceUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
     private String serviceKey = "SGekjuNyDUVjKfl26VG%2BSRQEJDGGsqsKvJTNZrZGQWcez4lllhqoKeYfnryztvVBRRWalGeP4ulEvt1Vkao%2FAg%3D%3D";
     private String time[];
     private String response = "";
@@ -29,6 +29,8 @@ public class GetWeatherFuture extends Thread{
     private int sky = -1;
     private String percent;
     private String tempreture;
+    private String maxTmp;
+    private String minTmp;
 
     public String result;
     public TextView textView;
@@ -131,7 +133,9 @@ public class GetWeatherFuture extends Thread{
                     if (tmp.equals("POP")) decide = "POP";
                     else if (tmp.equals("PTY")) decide = "PTY";
                     else if (tmp.equals("SKY")) decide = "SKY";
-                    else if (tmp.equals("T3H")) decide = "T3H";
+                    else if (tmp.equals("TMP")) decide = "TMP";
+                    else if (tmp.equals("TMN")) decide = "TMN";
+                    else if (tmp.equals("TMX")) decide = "TMX";
                 }
 
                 if (parser.getEventType() == XmlPullParser.START_TAG && parser.getName().equals("fcstValue")) {
@@ -140,7 +144,9 @@ public class GetWeatherFuture extends Thread{
                     if (decide.equals("POP")) percent = parser.getText();
                     else if (decide.equals("PTY")) status = Integer.parseInt(parser.getText());
                     else if (decide.equals("SKY")) sky = Integer.parseInt(parser.getText());
-                    else if (decide.equals("T3H")) tempreture = parser.getText();
+                    else if (decide.equals("TMP")) tempreture = parser.getText();
+                    else if (decide.equals("TMN")) minTmp = parser.getText();
+                    else if(decide.equals("TMX")) maxTmp = parser.getText();
 
                     decide = "None";
                 }
@@ -151,7 +157,7 @@ public class GetWeatherFuture extends Thread{
     private String makeContent(){
         String tmp = "<예보>\n\n";
 
-        tmp += "3시간 기온: " + tempreture + "℃\n\n";
+        tmp += "1시간 기온: " + tempreture + "℃\n\n";
         tmp += "하늘 상태: ";
         switch (sky){
             case 1:

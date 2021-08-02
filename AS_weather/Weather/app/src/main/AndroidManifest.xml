@@ -21,6 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".WeatherScreen"></activity>
+        <activity android:name=".AddItem"></activity>
+        <activity android:name=".DeleteItem"></activity>
     </application>
 
 </manifest>
