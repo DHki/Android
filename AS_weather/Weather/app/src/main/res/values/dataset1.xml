@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="loc_1">
+        <item>중구</item>
+        <item>서구</item>
+        <item>동구</item>
+        <item>영도구</item>
+        <item>부산진구</item>
+        <item>동래구</item>
+        <item>남구</item>
+        <item>북구</item>
+        <item>해운대구</item>
+        <item>사하구</item>
+        <item>금정구</item>
+        <item>강서구</item>
+        <item>연제구</item>
+        <item>수영구</item>
+        <item>사상구</item>
+        <item>기장군</item>
+    </string-array>
+
+    <string-array name="x_1">
+        <item>97</item>
+        <item>97</item>
+        <item>98</item>
+        <item>98</item>
+        <item>97</item>
+        <item>98</item>
+        <item>98</item>
+        <item>96</item>
+        <item>99</item>
+        <item>96</item>
+        <item>98</item>
+        <item>96</item>
+        <item>98</item>
+        <item>99</item>
+        <item>96</item>
+        <item>100</item>
+    </string-array>
+
+    <string-array name="y_1">
+        <item>74</item>
+        <item>74</item>
+        <item>75</item>
+        <item>74</item>
+        <item>75</item>
+        <item>76</item>
+        <item>75</item>
+        <item>76</item>
+        <item>75</item>
+        <item>74</item>
+        <item>77</item>
+        <item>76</item>
+        <item>76</item>
+        <item>75</item>
+        <item>75</item>
+        <item>77</item>
+    </string-array>
+
+</resources>

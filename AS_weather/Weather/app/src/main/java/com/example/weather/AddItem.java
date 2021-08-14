@@ -43,6 +43,18 @@ public class AddItem extends AppCompatActivity {
                             String ny0 = getResources().getStringArray(R.array.y_0)[position];
                             addLoc(location0, nx0, ny0);
                             break;
+                        case 1:
+                            String location1 = getResources().getStringArray(R.array.loc_1)[position];
+                            String nx1 = getResources().getStringArray(R.array.x_1)[position];
+                            String ny1 = getResources().getStringArray(R.array.y_1)[position];
+                            addLoc(location1, nx1, ny1);
+                            break;
+                        case 2:
+                            String location2 = getResources().getStringArray(R.array.loc_2)[position];
+                            String nx2 = getResources().getStringArray(R.array.x_2)[position];
+                            String ny2 = getResources().getStringArray(R.array.y_2)[position];
+                            addLoc(location2, nx2, ny2);
+                            break;
                         case 8:
                             String location8 = getResources().getStringArray(R.array.loc_8)[position];
                             String nx8 = getResources().getStringArray(R.array.x_8)[position];
@@ -68,6 +80,14 @@ public class AddItem extends AppCompatActivity {
             case 0:
                 ArrayAdapter adapter0 = ArrayAdapter.createFromResource(getApplicationContext(), R.array.loc_0, android.R.layout.simple_expandable_list_item_1);
                 listView.setAdapter(adapter0);
+                break;
+            case 1:
+                ArrayAdapter adapter1 = ArrayAdapter.createFromResource(getApplicationContext(), R.array.loc_1, android.R.layout.simple_expandable_list_item_1);
+                listView.setAdapter(adapter1);
+                break;
+            case 2:
+                ArrayAdapter adapter2 = ArrayAdapter.createFromResource(getApplicationContext(), R.array.loc_2, android.R.layout.simple_expandable_list_item_1);
+                listView.setAdapter(adapter2);
                 break;
             case 8:
                 ArrayAdapter adapter8 = ArrayAdapter.createFromResource(getApplicationContext(), R.array.loc_8, android.R.layout.simple_expandable_list_item_1);

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="loc_2">
+        <item>중구</item>
+        <item>동구</item>
+        <item>서구</item>
+        <item>남구</item>
+        <item>북구</item>
+        <item>수성구</item>
+        <item>달서구</item>
+        <item>달성군</item>
+    </string-array>
+
+    <string-array name="x_2">
+        <item>89</item>
+        <item>90</item>
+        <item>88</item>
+        <item>89</item>
+        <item>89</item>
+        <item>89</item>
+        <item>88</item>
+        <item>86</item>
+    </string-array>
+
+    <string-array name="y_2">
+        <item>90</item>
+        <item>91</item>
+        <item>90</item>
+        <item>90</item>
+        <item>91</item>
+        <item>90</item>
+        <item>90</item>
+        <item>88</item>
+    </string-array>
+
+</resources>

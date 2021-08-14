@@ -28,18 +28,6 @@ public class MainScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_screen);
 
-        try{
-            helper = new DBHelper(getApplicationContext(), "database.db", null, 1);
-            db = helper.getWritableDatabase();
-            helper.onCreate(db);
-
-            //helper.addLocation(db, "평택시", "62", "114");
-            //helper.addLocation(db, "pyeongteak", "62", "114");
-        } catch (Exception e) {}
-        finally {
-            db.close();
-        }
-
         lv = (ListView) findViewById(R.id.interest_list);
 
         setListView();
@@ -61,7 +49,6 @@ public class MainScreen extends AppCompatActivity {
                 for(int i = 0; i < position; i++) cursor.moveToNext();
                 loc = cursor.getString(0);
 
-                //Toast.makeText(getApplicationContext(), loc, Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getApplicationContext(), WeatherScreen.class);
                 intent.putExtra("location", loc);

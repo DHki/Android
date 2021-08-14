@@ -48,7 +48,7 @@ public class DeleteItem extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "deleted", Toast.LENGTH_SHORT).show();
                 setListView();
-            } n
+            }
         });
     }
 
